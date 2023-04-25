@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\pageController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +16,18 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/test',  function(Request $request) {
+$user = User::where('email', $request->input('email'))->first();
+      
+        $token = $user->createToken('personal');
 
+
+        return response([
+            'message' => 'Login.',
+            'token' => $token,
+            'user' => $user
+        ], 200);
+    });
 Route::get('/', function () {
     return view('login');
 });

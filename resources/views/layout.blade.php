@@ -12,6 +12,8 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     {{-- style --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {{-- scripts --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 </head>
 
 <body class="antialiased">

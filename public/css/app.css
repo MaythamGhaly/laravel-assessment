@@ -21,16 +21,16 @@ body{
     border-radius: 30px;
 }
 .gender{
-    width: 100%;
+    width: 30%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     margin: 5px;
 }
 .dropdown{
     margin: 5px;
-    width: 40%;
     height: 40px;
+    width: 80%;
     border-radius: 30px;
 }
 .button{
@@ -40,6 +40,9 @@ body{
 }
 @media  (max-width:500px) {
     .input{
+        width: 100%;
+    }
+    .gender{
         width: 100%;
     }
 }
