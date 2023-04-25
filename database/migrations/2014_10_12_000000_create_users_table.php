@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone_number')->nullable();
+            $table->string('gender')->enum(['male', 'female'])->nullable();
+            $table->bigInteger('department_id')->unsigned()->nullable();
+            $table->foreign('department_id')->references('id')->on('departments')->cascadeOnUpdate()->restrictOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });
