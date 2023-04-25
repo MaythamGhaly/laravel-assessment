@@ -1,0 +1,45 @@
+/* register page */
+body{
+    background-color: #cacaca;
+}
+.logo{
+    border-radius: 30px;
+}
+.container{
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.input{
+    padding: 20px;
+    margin: 5px;
+    width : 30%;
+    height: 15px;
+    border-radius: 30px;
+}
+.gender{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 5px;
+}
+.dropdown{
+    margin: 5px;
+    width: 40%;
+    height: 40px;
+    border-radius: 30px;
+}
+.button{
+    width: 150px;
+    height: 40px;
+    border-radius: 30px;
+}
+@media  (max-width:500px) {
+    .input{
+        width: 100%;
+    }
+}
