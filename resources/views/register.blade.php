@@ -9,7 +9,15 @@
         <input type="password" placeholder="renter-password" class="input">
         <input type="number" placeholder="phone number: 71XXXXXX" class="input">
         <input type="text" placeholder="gender" class="input">
-        <input type="text" placeholder="department" class="input">
+        <div action="/action_page.php" class="gender">
+            <label for="department">Department:</label>
+            <select name="department" id="department" class="dropdown">
+                @foreach ($response['department'] as $dep)
+                    <option value="volvo">{{ $dep->name }}</option>
+                @endforeach
+            </select>
+            <br><br>
+        </div>
         <div action="/action_page.php" class="gender">
             <label for="genders">Gender:</label>
             <select name="genders" id="cars" class="dropdown">

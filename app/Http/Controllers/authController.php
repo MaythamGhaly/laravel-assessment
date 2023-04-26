@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class authController extends Controller
 {
@@ -18,21 +21,23 @@ class authController extends Controller
         $user = User::where('email', $request->email)->first();
         
         if (empty($user)) {
-            return response(['message' => 'Email is invalid.']);
+            
+            Session::flash('error', 'User not found.');
+            return redirect(route('login'));
         }
        
         if (!Auth::attempt($request->only('email', 'password'))) {
-            return response([
-                'message'=> 'Password is invalid.',
-            ]);
+            Session::flash('error', 'password is incorrect.');
+            return redirect(route('login'));
         }
       
         $token = $user->createToken('personal')->plainTextToken;
-
+        $department = Department::all();
+        $response['department'] = $department;
         $response['user'] = $user;
         $response['token'] = $token;
+       
 
-
-        return response()->json($response);
+        return view('home',compact('response'));
     }
 }

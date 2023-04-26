@@ -19,16 +19,16 @@ use Illuminate\Http\Request;
 */
 Route::get('/', function () {
     return view('login');
-});
+})->name('login');
 Route::middleware('auth:sanctum')->get('/home', [pageController::class, 'index']);
 Route::get('/register', [pageController::class, 'showRegister'])->name('register');
-Route::post('/login', [authController::class, 'login']);
-Route::get('/token', function () {
-    return csrf_token(); 
-});
+Route::post('/login', [authController::class, 'login'])->name('auth');
+// Route::get('/token', function () {
+//     return csrf_token(); 
+// });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 

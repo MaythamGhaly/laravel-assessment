@@ -1,9 +1,14 @@
 @extends('layout')
 @section('content')
     <div class="content">
-        <form class="container" id="SubmitForm" method="POST" action="{{ route('login') }}">
+        <form class="container" id="SubmitForm" method="POST" action="{{ route('auth') }}">
             @csrf {{ csrf_field() }}
             <img src="{{ asset('images/logo.jpg') }}" alt="logo" class="logo">
+            @if (session()->has('error'))
+                <div class="alert">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
             <input type="text" placeholder="email" class="input @error('email') is-invalid @enderror" id="email"
                 name="email">
             <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
@@ -39,7 +44,7 @@
                 type: "POST",
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    
+
                     email: email,
                     mobile: mobile,
                     message: message,
