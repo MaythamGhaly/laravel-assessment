@@ -30,7 +30,7 @@ class authController extends Controller
             Session::flash('error', 'password is incorrect.');
             return redirect(route('login'));
         }
-      
+
         $token = $user->createToken('personal')->plainTextToken;
         $department = Department::all();
         $response['department'] = $department;

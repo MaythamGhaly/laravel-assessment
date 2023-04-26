@@ -1,24 +1,29 @@
 @extends('layout')
 @section('content')
     <div class="content">
-        <form class="container">
+        <form class="container" id="SubmitForm" method="POST" action="{{ route('edit') }}">
+            @csrf {{ csrf_field() }}
             <img src="{{ asset('images/logo.jpg') }}" alt="logo" class="logo">
             <h3>Your Information:</h3>
-            <input type="text" placeholder="name" class="input" value="{{ $response['user']->name }}">
-            <input type="text" placeholder="email" class="input" value="{{ $response['user']->email }}">
-            <input type="password" placeholder="password" class="input">
+            @if (session()->has('success'))
+                <div class="done">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+            <input type="text" placeholder="name" name="name" class="input" value="{{ $response['user']->name }}">
+            <input type="text" placeholder="email" name="email" class="input" value="{{ $response['user']->email }}">
+            <input type="password" placeholder="password" name="password" class="input">
             <input type="password" placeholder="renter-password" class="input">
-            <input type="number" placeholder="phone number: 71XXXXXX" class="input"
+            <input type="number" name="phone_number" placeholder="phone number: 71XXXXXX" class="input"
                 value="{{ $response['user']->phone_number }}">
-            <input type="text" placeholder="department" class="input" value="{{ $response['user']->department_id }}">
             <div action="/action_page.php" class="gender">
                 <label for="department">Department:</label>
-                <select name="department" id="department" class="dropdown">
+                <select name="department_id" id="department_id" class="dropdown">
                     @foreach ($response['department'] as $dep)
                         @if ($response['user']->department_id == $dep->id)
-                            <option value="volvo" selected>{{ $dep->name }}</option>
+                            <option id="{{$dep->id}}" value="{{$dep->id}}" selected>{{ $dep->name }}</option>
                         @else
-                            <option value="volvo">{{ $dep->name }}</option>
+                            <option id="{{$dep->id}}" value="{{$dep->id}}">{{ $dep->name }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -26,18 +31,20 @@
             </div>
             <div action="/action_page.php" class="gender">
                 <label for="genders">Gender:</label>
-                <select name="genders" id="gender" class="dropdown">
+                <select name="gender" id="gender" class="dropdown">
                     @if ($response['user']->gender == 'male')
-                        <option value="volvo" selected>Male</option>
-                        <option value="saab">Female</option>
+                        <option id="1" value="male" selected>Male</option>
+                        <option id="2" value="female">Female</option>
                     @elseif($response['user']->gender == 'female')
-                        <option value="volvo">Male</option>
-                        <option value="saab" selected>Female</option>
+                        <option id="1" value="male">Male</option>
+                        <option id="2" value="female" selected>Female</option>
                     @endif
                 </select>
                 <br><br>
             </div>
-            <input type="submit" value="Register" class="button">
+            <input type="submit" value="Edit" class="button">
         </form>
+        <a href="{{route('del')}}"><button type="submit" value="delete" class="button">Delete</button></a>
+        
     </div>
 @endsection

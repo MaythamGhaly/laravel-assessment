@@ -42,6 +42,10 @@ body{
     color: red;
     margin: 8px;
 }
+.done{
+    color: green;
+    margin: 8px;
+}
 @media  (max-width:500px) {
     .input{
         width: 100%;
