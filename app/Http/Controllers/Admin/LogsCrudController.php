@@ -17,7 +17,7 @@ class LogsCrudController extends CrudController
     // use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     // use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    // use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -40,10 +40,10 @@ class LogsCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('user_id')
-            ->label('User')
+            ->label('Email')
             ->type('select')
             ->entity('user')
-            ->attribute('name')
+            ->attribute('email')
             ->wrapper(['class' => 'form-group col-md-6']);
         CRUD::column('action');
         CRUD::column('created_at');

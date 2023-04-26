@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Logs;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,12 @@ class userController extends Controller
         $user->department_id = $request->get('department_id');
         $user->save();
 
+        $log = new Logs();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'update';
+
+        $log->save();
+        
         $department = Department::all();
         $response['department'] = $department;
         $response['user'] = $user;
@@ -60,7 +67,11 @@ class userController extends Controller
 
 
         $user->delete();
+        $log = new Logs();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'delete account';
 
+        $log->save();
         if ($user->delete()) {
             Auth::logout();
             
