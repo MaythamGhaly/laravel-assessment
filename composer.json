@@ -9,6 +9,7 @@
         "backpack/crud": "^5.5",
         "barryvdh/laravel-ide-helper": "*",
         "guzzlehttp/guzzle": "^7.2",
+        "laracasts/generators": "*",
         "laravel/framework": "^10.8",
         "laravel/passport": "*",
         "laravel/sanctum": "*",
