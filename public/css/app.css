@@ -46,6 +46,11 @@ body{
     color: green;
     margin: 8px;
 }
+.delete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 @media  (max-width:500px) {
     .input{
         width: 100%;

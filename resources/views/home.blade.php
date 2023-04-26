@@ -21,9 +21,10 @@
                 <select name="department_id" id="department_id" class="dropdown">
                     @foreach ($response['department'] as $dep)
                         @if ($response['user']->department_id == $dep->id)
-                            <option id="{{$dep->id}}" value="{{$dep->id}}" selected>{{ $dep->name }}</option>
+                            <option id="{{ $dep->id }}" value="{{ $dep->id }}" selected>{{ $dep->name }}
+                            </option>
                         @else
-                            <option id="{{$dep->id}}" value="{{$dep->id}}">{{ $dep->name }}</option>
+                            <option id="{{ $dep->id }}" value="{{ $dep->id }}">{{ $dep->name }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -44,7 +45,9 @@
             </div>
             <input type="submit" value="Edit" class="button">
         </form>
-        <a href="{{route('del')}}"><button type="submit" value="delete" class="button">Delete</button></a>
-        
+        <div class="delete">
+            <a href="{{ route('del') }}"><button type="submit" value="delete" class="button">Delete Account</button></a>
+        </div>
+
     </div>
 @endsection
