@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 class pageController extends Controller
 {
-    public function index()
+    public function showRegister()
     {
         return view('register');
+    }
+    public function index()
+    {
+        return 'hello';
     }
 }

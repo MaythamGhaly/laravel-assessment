@@ -1,7 +1,8 @@
 @extends('layout')
 @section('content')
     <div class="content">
-        <form class="container" id="SubmitForm" method="POST" action="{{ route('register') }}">
+        <form class="container" id="SubmitForm" method="POST" action="{{ route('login') }}">
+            @csrf {{ csrf_field() }}
             <img src="{{ asset('images/logo.jpg') }}" alt="logo" class="logo">
             <input type="text" placeholder="email" class="input @error('email') is-invalid @enderror" id="email"
                 name="email">
@@ -34,11 +35,11 @@
             console.log('submit')
 
             $.ajax({
-                url: "/submit-form",
+                url: "/login",
                 type: "POST",
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    name: name,
+                    
                     email: email,
                     mobile: mobile,
                     message: message,

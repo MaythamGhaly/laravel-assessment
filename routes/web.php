@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\authController;
 use App\Http\Controllers\pageController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -16,21 +17,18 @@ use Illuminate\Http\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/test',  function(Request $request) {
-$user = User::where('email', $request->input('email'))->first();
-      
-        $token = $user->createToken('personal');
-
-
-        return response([
-            'message' => 'Login.',
-            'token' => $token,
-            'user' => $user
-        ], 200);
-    });
 Route::get('/', function () {
     return view('login');
 });
+Route::middleware('auth:sanctum')->get('/home', [pageController::class, 'index']);
+Route::get('/register', [pageController::class, 'showRegister'])->name('register');
+Route::post('/login', [authController::class, 'login']);
+Route::get('/token', function () {
+    return csrf_token(); 
+});
 
-Route::get('/register', [pageController::class, 'index'])->name('register');
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
 
