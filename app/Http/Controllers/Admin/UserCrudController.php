@@ -14,7 +14,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class UserCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    // use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     // use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -69,20 +69,30 @@ class UserCrudController extends CrudController
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
-    // protected function setupCreateOperation()
-    // {
-    //     CRUD::setValidation(UserRequest::class);
+    protected function setupCreateOperation()
+    {
+        CRUD::setValidation(UserRequest::class);
 
-    //     CRUD::field('name');
-    //     CRUD::field('email');
-    //     CRUD::field('password');
+        CRUD::field('name');
+        CRUD::field('email');
+        CRUD::field('password');
+        CRUD::field('phone_number');
+        CRUD::field('gender')
+        ->type('select_from_array')
+        ->options($this->gender);
+        CRUD::field('department_id')
+            ->label('Department')
+            ->type('select')
+            ->entity('department')
+            ->attribute('name')
+            ->wrapper(['class' => 'form-group col-md-6']);
 
-    //     /**
-    //      * Fields can be defined using the fluent syntax or array syntax:
-    //      * - CRUD::field('price')->type('number');
-    //      * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-    //      */
-    // }
+        /**
+         * Fields can be defined using the fluent syntax or array syntax:
+         * - CRUD::field('price')->type('number');
+         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         */
+    }
 
     /**
      * Define what happens when the Update operation is loaded.
