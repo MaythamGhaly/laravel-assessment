@@ -11,57 +11,19 @@
             @endif
             <input type="text" placeholder="email" class="input @error('email') is-invalid @enderror" id="email"
                 name="email">
-            <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
-
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
             <input type="password" placeholder="password" class="input @error('password') is-invalid @enderror"
                 id="password" name="password">
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+            <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password"></span>
             <button type="submit" class="button">Login</button>
             <a href="{{ route('registerPage') }}" class="button">Register</a>
         </form>
     </div>
 @endsection
 
-@push('dashboard-scripts')
-    <script>
-        $('#SubmitForm').on('submit', function(e) {
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITEKEY') }}"></script>
 
-            let email = $('#email').val();
-            let pass = $('#password').val();
-            console.log('submit')
-
-            $.ajax({
-                url: "/login",
-                type: "POST",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-
-                    email: email,
-                    mobile: mobile,
-                    message: message,
-                },
-                success: function(response) {
-                    $('#successMsg').show();
-                    console.log(response);
-                },
-                error: function(response) {
-                    $('#nameErrorMsg').text(response.responseJSON.errors.name);
-                    $('#emailErrorMsg').text(response.responseJSON.errors.email);
-                    $('#mobileErrorMsg').text(response.responseJSON.errors.mobile);
-                    $('#messageErrorMsg').text(response.responseJSON.errors.message);
-                },
-            });
-        });
-    </script>
     <script>
         $(document).on('click', '.toggle-password', function() {
             $(this).toggleClass("fa-eye-slash");

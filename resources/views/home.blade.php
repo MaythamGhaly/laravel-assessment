@@ -12,8 +12,15 @@
             @endif
             <input type="text" placeholder="name" name="name" class="input" value="{{ $response['user']->name }}">
             <input type="text" placeholder="email" name="email" class="input" value="{{ $response['user']->email }}">
-            <input type="password" placeholder="password" name="password" class="input">
-            <input type="password" placeholder="renter-password" class="input">
+            <input type="password" placeholder="password" name="password"
+                class="input @error('password') is-invalid @enderror" required>
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <input type="password" placeholder="renter-password" class="input  @error('password') is-invalid @enderror"
+                name="password_confirmation" required>
             <input type="number" name="phone_number" placeholder="phone number: 71XXXXXX" class="input"
                 value="{{ $response['user']->phone_number }}">
             <div action="/action_page.php" class="gender">

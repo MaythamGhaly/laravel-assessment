@@ -14,6 +14,9 @@ class userController extends Controller
 {
     public function edit(Request $request)
     {
+        $request->validate([
+            'password' => 'required|confirmed|min:6'
+        ]);
         $user = User::findOrfail(Auth::user()->id);
         $user->name = $request->name;
         $user->email = $request->email;
@@ -35,7 +38,9 @@ class userController extends Controller
 
     public function register(Request $request)
     {
-
+        $request->validate([
+            'password' => 'required|confirmed|min:6'
+        ]);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -53,12 +58,13 @@ class userController extends Controller
     {
         $user = User::find(Auth::user()->id);
 
-       
+
         $user->delete();
-        
+
         if ($user->delete()) {
             Auth::logout();
-            return Redirect(route('login'));
+            
         }
+        return view('login');
     }
 }
